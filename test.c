@@ -2,9 +2,11 @@
 #include <stdio.h>
 #include <dlfcn.h>
 
+#ifdef DEFINE_REGISTER_IT
 void register_it_impl(int num) {
   printf("Registered number: %d\n", num);
 }
+#endif
 
 int main() {
   void *handle_a = dlopen("./a.so", RTLD_LAZY);
