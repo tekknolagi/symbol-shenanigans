@@ -1,12 +1,15 @@
 #pragma once
+#include <stdio.h>
 
-void register_it_hook(int num) __attribute__((weak));
-// weak symbol in case register_it is not defined in the main program
+// Weak reference resolved by the dynamic linker at load time against
+// the main executable. If the main module doesn't define register_it,
+// the symbol stays null and callers should use register_it_fallback.
+extern void register_it_impl(int num) __attribute__((weak_import));
 
-void register_it(int num) {
-  if (register_it_hook) {
-    register_it_hook(num);
+static void register_it(int num) {
+  if (&register_it_impl) {
+    register_it_impl(num);
   } else {
-    printf("WEAK\n");
+    printf("register_it fallback: %d\n", num);
   }
 }

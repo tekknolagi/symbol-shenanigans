@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <dlfcn.h>
 
-void register_it(int num) {
+void register_it_impl(int num) {
   printf("Registered number: %d\n", num);
 }
 
