@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: make
+
+      - name: Check test_old output
+        run: |
+          ./test_old > old_actual
+          diff old_actual old_expected
+
+      - name: Check test_new output
+        run: |
+          ./test_new > new_actual
+          diff new_actual new_expected

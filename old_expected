@@ -1,0 +1,4 @@
+Hello from module A!
+register_it fallback: 65
+Hello from module B!
+register_it fallback: 66
