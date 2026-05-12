@@ -1,4 +1,6 @@
 *.so
+*.dll
+*.exe
 test_old
 test_new
 test
